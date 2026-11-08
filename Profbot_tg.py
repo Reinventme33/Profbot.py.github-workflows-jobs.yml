@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 BOT_TOKEN = os.environ["TG_BOT_TOKEN"]
 CHAT_ID = os.environ["TG_CHAT_ID"]
 
-SEARCH_URL = "https://www.profesia.sk/praca/bratislava/?keywords=data%20analyst"
+SEARCH_URL = "https://www.profesia.sk/praca/bratislava/administrativny-pracovnik-pracovnicka/?jobtype_id=4&languages=73&radius=radius30"
 SEEN_FILE = Path("seen_jobs.json")
 
 HEADERS = {
