@@ -56,8 +56,15 @@ def parse_card(card, link):
     if not title:
         return None
 
-    company_tag = card.select_one(".employer, a[href*='/zamestnavatelia/'], [class*='company']")
-    company = company_tag.get_text(" ", strip=True) if company_tag else "Neuvedené"
+    company = "Neuvedené"
+    # Ищем по очереди и берём первый непустой текст
+    # (ссылка-логотип компании тоже подходит под селектор, но она без текста)
+    for selector in ("span.employer", ".employer", "[class*='company']"):
+        tag = card.select_one(selector)
+        text = tag.get_text(" ", strip=True) if tag else ""
+        if text:
+            company = text
+            break
 
     return {"id": oid, "title": title, "company": company, "url": url}
 
@@ -156,4 +163,5 @@ def run_once():
 
 if __name__ == "__main__":
     run_once()
+
 
